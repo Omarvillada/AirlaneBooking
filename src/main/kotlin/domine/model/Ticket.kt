@@ -1,5 +1,6 @@
 package domine.model
 
+import domine.model.seat.Seat
 
 
 data class Ticket(
