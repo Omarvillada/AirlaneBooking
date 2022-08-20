@@ -6,11 +6,11 @@ import domine.model.baggage.type.Checked
 import domine.model.baggage.type.Hand
 import java.math.BigDecimal
 
-open class BaggagePackage(
-    open val name: String = "Baggage Plan",
-    open val price: BigDecimal =  BigDecimal(0.0),
-){
-    open val boardingTurn: BoardingTurn = BoardingTurn.FIRST
+abstract class BaggagePackage {
+    abstract val name: String
+    abstract val price: BigDecimal
+
+    abstract val boardingTurn: BoardingTurn
     open val baggageType: List<BaggageType> = listOf(
         Hand(),
         BigHand(),

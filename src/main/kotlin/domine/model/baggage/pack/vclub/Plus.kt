@@ -4,7 +4,8 @@ import domine.model.baggage.pack.BoardingTurn
 import java.math.BigDecimal
 
 class Plus(
-    name: String = "Plus",
-    price: BigDecimal) : VClub(name, price) {
+    price: BigDecimal
+) : VClub(price) {
+    override val name: String = "ClubPlus"
     override val boardingTurn: BoardingTurn = BoardingTurn.FIRST
 }
