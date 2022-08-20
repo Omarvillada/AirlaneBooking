@@ -1,5 +1,6 @@
 package domine.model
 
+import domine.model.baggage.pack.BaggagePackage
 import domine.model.seat.Seat
 
 
