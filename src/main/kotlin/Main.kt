@@ -19,8 +19,8 @@ fun main() {
         price = BigDecimal(100.0),
         departureArrivalBooking = getAirportPair()
     )
-    val flightFormatter = flight.format()
-    println(flightFormatter)
+    //val flightFormatter = flight.format()
+    //println(flightFormatter)
 
     val ticket = Ticket(
         flight = flight,
@@ -33,6 +33,7 @@ fun main() {
         Seat("2", BigDecimal(15), SeatStatus.RESERVED, seatClass = SeatClass.ECONOMY)
     )
 
+    println()
     val ticketFormatted = ticket.format()
     println(ticketFormatted)
 
