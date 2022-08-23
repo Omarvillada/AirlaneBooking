@@ -1,4 +1,4 @@
-package presentation
+package presentation.ticket.formats
 
 import domine.model.Ticket
 import domine.presentation.Formatter

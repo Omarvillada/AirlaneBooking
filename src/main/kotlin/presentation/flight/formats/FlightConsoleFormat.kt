@@ -1,4 +1,4 @@
-package presentation.flight
+package presentation.flight.formats
 
 import domine.model.Flight
 import domine.presentation.Formatter
