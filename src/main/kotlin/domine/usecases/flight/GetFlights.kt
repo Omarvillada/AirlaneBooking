@@ -1,4 +1,4 @@
-package domine.usecases
+package domine.usecases.flight
 
 import domine.model.AirCraft
 import domine.model.Airport
@@ -9,22 +9,25 @@ import java.time.LocalDateTime
 import java.time.Month
 import domine.presentation.Formatter
 
-class GetFlights(
-    private val formatter: Formatter<Flight>
-) {
-    fun invoke(): String {
+/**
+ * 1. Mostrar los vuelos disponibles de un mes
+ */
+class GetFlights {
+    fun invoke(month: Month): Map<Int, Flight> {
         val flight = Flight(
             number = "Y4 708",
             airCraft = AirCraft("Airbus","A320"),
             price = BigDecimal(100.0),
             departureArrivalBooking = getAirportPair()
         )
-        val flights = listOf(
-            flight,
-            flight,
-            flight
+        val flightsMap = mapOf(
+            1 to flight,
+            2 to flight,
+            3 to flight
         )
-        return formatter.format(flights)
+        return flightsMap.filter {
+            flightEntry ->  flightEntry.value .departureArrivalBooking.first.dateTime.month == month
+        }
     }
 
     private fun getAirportPair(): Pair<AirportBooking, AirportBooking> {

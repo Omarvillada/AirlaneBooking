@@ -1,6 +1,6 @@
 import domine.model.*
 import domine.presentation.Formatter
-import domine.usecases.GetFlights
+import domine.usecases.flight.GetFlights
 import presentation.PresentationFormat
 import presentation.flight.FlightPresentationFactory
 
