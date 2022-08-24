@@ -1,6 +1,6 @@
 package domine.model.baggage.type
 
-class BoxPacked : BaggageType(){
+class BoxPacked : BaggageTypes(){
     override val emoji: String = "🎁"
     override val title: String = "BoxPacked"
 }

@@ -1,6 +1,6 @@
 package domine.model.baggage.type
 
-class BigHand : BaggageType() {
+class BigHand : BaggageTypes() {
     override val emoji: String
         get() = super.emoji + super.emoji
     override val title: String = "Big Hand Baggage"

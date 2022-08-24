@@ -1,6 +1,6 @@
 package domine.model.baggage.type
 
-open class BaggageType {
+open class BaggageTypes {
     open val emoji: String = "\uD83D\uDC5C"
     open val quantity: Int = 1
     open val title: String = "Baggage"

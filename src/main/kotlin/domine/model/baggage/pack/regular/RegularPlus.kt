@@ -6,4 +6,6 @@ import java.math.BigDecimal
 class RegularPlus( price: BigDecimal) : Regular(price) {
     override val name: String = "Plus"
     override val boardingTurn: BoardingTurn = BoardingTurn.FIRST
+
+    override val price: BigDecimal = price + BigDecimal(20)
 }
