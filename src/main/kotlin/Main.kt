@@ -14,8 +14,11 @@ import domine.usecases.ticket.AssignFlightToTicket
 import domine.usecases.ticket.di.TicketDataDI
 import presentation.baggage.BaggagePackageConsole
 import presentation.baggage.types.BaggageTypesConsole
+import presentation.extfunction.isMenuOptionValid
 import presentation.flight.formats.FlightConsoleFormat
 import java.time.Month
+
+
 
 fun main() {
 
@@ -24,14 +27,26 @@ fun main() {
     val getFlights = GetFlights(
         FlightDataDI().providesFlightsData()
     ).invoke(Month.JANUARY)
-    getFlights.forEach { t, u ->
-        print("$t. ")
-        println(FlightConsoleFormat().format(u))
-    }
+
+
+    var flightOption: String = ""
+    do {
+        //Mostrar la lista de flights
+        getFlights.forEach { t, u ->
+            print("$t. ")
+            println(FlightConsoleFormat().format(u))
+        }
+        println("*** Select Number Option ***")
+        flightOption = readLine().orEmpty()
+
+
+    }while (!flightOption.isMenuOptionValid(flightsMap = getFlights))
+
+    println("Option Selected: $flightOption")
 
     println("*** Flight Selected ***")
 
-    val flight = getFlights[1]
+    val flight = getFlights[flightOption.toInt()]
     //Asignar un vuelo al ticket
     AssignFlightToTicket(ticketData).invoke(flight)
 
@@ -39,35 +54,4 @@ fun main() {
     println(
         FlightConsoleFormat().format(flightSelected)
     )
-
-
-
-
-/*
-    val vClubLocalSource = BaggageVClubLocalSource()
-    val getVClubPackages = GetBaggagePackage(vClubLocalSource).invoke()
-
-    println("*** VClub Baggage´s ***")
-    getVClubPackages.forEach {(t, u) ->
-        print("$t. ")
-
-        println(
-            BaggagePackageConsole(
-                BaggageTypesConsole()
-            ).format(u))
-    }
-
-    val regularLocalSource = BaggageRegularLocalSource()
-    val getRegularPackages = GetBaggagePackage(regularLocalSource).invoke()
-    println()
-    println("*** Regular Baggage´s ***")
-    getRegularPackages.forEach {(t, u) ->
-        print("$t. ")
-        println(
-            BaggagePackageConsole(
-                BaggageTypesConsole()
-            ).format(u))
-    }
-
- */
 }
