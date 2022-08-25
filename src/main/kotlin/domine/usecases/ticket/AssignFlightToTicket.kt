@@ -10,7 +10,7 @@ import domine.model.Ticket
 class AssignFlightToTicket(
     private val ticketDataSource: TicketDataSource
 ) {
-    operator fun invoke(flight: Flight): Ticket? {
+    operator fun invoke(flight: Flight?): Ticket? {
         return flight?.let {
             ticketDataSource.tickets.first().apply {
                 this.flight = flight

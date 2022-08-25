@@ -18,7 +18,7 @@ class GetFlights(
         return flightDataSource
             .getFlights()
             .filter {
-            flightEntry ->  flightEntry.value .departureArrivalBooking.first.dateTime.month == month
+            flightEntry ->  flightEntry.value.departureArrivalBooking.first.dateTime.month == month
         }
     }
 
