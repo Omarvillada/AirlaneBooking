@@ -3,7 +3,7 @@ package domine.usecases.flight
 import domine.model.Flight
 
 class GetFlightSaved  {
-    operator  fun invoke()/*: Flight*/ {
-
+    operator  fun invoke(): Flight? {
+        return null
     }
 }

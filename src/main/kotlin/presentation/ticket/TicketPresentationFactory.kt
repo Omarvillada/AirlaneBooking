@@ -1,7 +1,7 @@
 package presentation.ticket
 
 import domine.model.Ticket
-import domine.presentation.Formatter
+import presentation.utils.Formatter
 import presentation.PresentationFactory
 import presentation.PresentationFormat
 import presentation.ticket.formats.TicketConsoleFormat

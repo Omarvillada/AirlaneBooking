@@ -1,9 +1,7 @@
 package domine.model
 
-import domine.presentation.Formatter
 import java.math.BigDecimal
 import java.time.Duration
-import java.time.format.DateTimeFormatter
 
 data class Flight(
     val number: String,

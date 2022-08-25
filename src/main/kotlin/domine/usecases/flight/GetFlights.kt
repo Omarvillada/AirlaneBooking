@@ -1,14 +1,11 @@
 package domine.usecases.flight
 
 import domine.datasource.flight.FlightDataSource
-import domine.model.AirCraft
 import domine.model.Airport
 import domine.model.AirportBooking
 import domine.model.Flight
-import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.time.Month
-import domine.presentation.Formatter
 
 /**
  * 1. Mostrar los vuelos disponibles de un mes

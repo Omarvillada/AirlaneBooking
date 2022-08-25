@@ -1,3 +1,4 @@
+import data.baggage.BaggageRegularLocalSource
 import data.baggage.BaggageVClubLocalSource
 import domine.usecases.baggage.GetBaggagePackage
 import presentation.baggage.BaggagePackageConsole
@@ -11,10 +12,22 @@ fun main() {
     println("*** VClub Baggage´s ***")
     getVClubPackages.forEach {(t, u) ->
         print("$t. ")
+
         println(
             BaggagePackageConsole(
                 BaggageTypesConsole()
-            ).format(u)
-        )
+            ).format(u))
+    }
+
+    val regularLocalSource = BaggageRegularLocalSource()
+    val getRegularPackages = GetBaggagePackage(regularLocalSource).invoke()
+    println()
+    println("*** Regular Baggage´s ***")
+    getRegularPackages.forEach {(t, u) ->
+        print("$t. ")
+        println(
+            BaggagePackageConsole(
+                BaggageTypesConsole()
+            ).format(u))
     }
 }

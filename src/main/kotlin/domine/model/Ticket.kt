@@ -2,7 +2,6 @@ package domine.model
 
 import domine.model.baggage.pack.BaggagePackage
 import domine.model.seat.Seat
-import domine.presentation.Formatter
 import java.math.BigDecimal
 
 

@@ -1,6 +1,4 @@
-package domine.presentation
-
-import domine.model.Flight
+package presentation.utils
 
 //Generics
 interface Formatter<T> {

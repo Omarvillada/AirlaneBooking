@@ -6,7 +6,7 @@ import java.math.BigDecimal
 class ClubClassic(
     price: BigDecimal
     ) : VClub(price) {
-    override val name: String = "ClubClassic"
+    override val name: String = "Classic"
     override val boardingTurn: BoardingTurn = BoardingTurn.SECOND
 
     override val price: BigDecimal

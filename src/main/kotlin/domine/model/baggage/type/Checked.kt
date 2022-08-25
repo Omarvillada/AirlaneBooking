@@ -1,6 +1,6 @@
 package domine.model.baggage.type
 
-class Checked : BaggageTypes() {
-    override val emoji: String = "\uD83D\uDCBC"
+class Checked : BaggageType() {
+    override val emoji: String = "🧳"
     override val title: String = "Checked"
 }
