@@ -7,8 +7,11 @@ import data.flight.FlightLocalSource
 import data.ticket.TicketListSingleton
 import domine.datasource.airport.AirportDatasource
 import domine.usecases.baggage.GetBaggagePackage
+import domine.usecases.flight.GetFlightSaved
 import domine.usecases.flight.GetFlights
+import domine.usecases.flight.di.FlightDataDI
 import domine.usecases.ticket.AssignFlightToTicket
+import domine.usecases.ticket.di.TicketDataDI
 import presentation.baggage.BaggagePackageConsole
 import presentation.baggage.types.BaggageTypesConsole
 import presentation.flight.formats.FlightConsoleFormat
@@ -16,24 +19,23 @@ import java.time.Month
 
 fun main() {
 
-    val airportDatasource = AirportLocalSource()
-    val airportBookingLocalSource = AirportBookingLocalSource(airportDatasource)
-    val airCraftLocalSource = AirCraftLocalSource()
+    val ticketData = TicketDataDI().providesTicketsData()
 
-    val flightLocal = FlightLocalSource(airCraftLocalSource,airportBookingLocalSource)
-    val getFlights = GetFlights(flightLocal).invoke(Month.JANUARY)
+    val getFlights = GetFlights(
+        FlightDataDI().providesFlightsData()
+    ).invoke(Month.JANUARY)
     getFlights.forEach { t, u ->
         print("$t. ")
         println(FlightConsoleFormat().format(u))
     }
 
     println("*** Flight Selected ***")
-    val ticketListSingleton = TicketListSingleton()
+
     val flight = getFlights[1]
     //Asignar un vuelo al ticket
-    AssignFlightToTicket(ticketListSingleton).invoke(flight)
+    AssignFlightToTicket(ticketData).invoke(flight)
 
-    val flightSelected = ticketListSingleton.tickets.first().flight
+    val flightSelected = GetFlightSaved(ticketData).invoke()
     println(
         FlightConsoleFormat().format(flightSelected)
     )
