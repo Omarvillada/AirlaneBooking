@@ -6,6 +6,12 @@ import presentation.baggage.types.BaggageTypesConsole
 
 fun main() {
 
+
+
+
+
+
+/*
     val vClubLocalSource = BaggageVClubLocalSource()
     val getVClubPackages = GetBaggagePackage(vClubLocalSource).invoke()
 
@@ -30,4 +36,6 @@ fun main() {
                 BaggageTypesConsole()
             ).format(u))
     }
+
+ */
 }
