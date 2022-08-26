@@ -10,7 +10,7 @@ import domine.model.seat.Seat
 class AssignSeatToTicked(
     private val ticketDataSource: TicketDataSource
 ) {
-    operator fun invoke(seat: Seat):Ticket?{
+    operator fun invoke(seat: Seat?):Ticket?{
         return seat?.let {
             ticketDataSource.tickets.first().apply {
                 this.seat = it
