@@ -7,7 +7,7 @@ import domine.model.baggage.pack.BaggagePackage
 /**
  * 4. Seleccionar un equipaje
  */
-class AssignBaggagePackToTicket(
+class AssignBaggagePackageToTicket(
      private val ticketDataSource: TicketDataSource
 ) {
      operator fun invoke(baggagePackage: BaggagePackage) : Ticket?{
