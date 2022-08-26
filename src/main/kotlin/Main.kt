@@ -1,6 +1,7 @@
 import data.baggage.BaggageRegularLocalSource
 import data.baggage.BaggageVClubLocalSource
 import domine.model.Flight
+import domine.model.Passenger
 import domine.model.baggage.pack.BaggagePackage
 import domine.model.seat.Seat
 import domine.model.seat.SeatSection
@@ -12,16 +13,18 @@ import domine.usecases.flight.di.FlightDataDI
 import domine.usecases.seat.GetSeatSaved
 import domine.usecases.seat.GetSeatsBy
 import domine.usecases.seat.GetSeatsSection
-import domine.usecases.ticket.AssignBaggagePackageToTicket
-import domine.usecases.ticket.AssignFlightToTicket
-import domine.usecases.ticket.AssignSeatToTicked
+import domine.usecases.ticket.*
 import domine.usecases.ticket.di.TicketDataDI
 import presentation.PresentationFormat
 import presentation.baggage.BaggagePackPresentationFactory
 import presentation.baggage.BaggagePackageEnum
+import presentation.extfunction.isBlankOrEmpty
+import presentation.extfunction.isNumber
 import presentation.flight.FlightPresentationFactory
 import presentation.flight.formats.FlightConsoleFormat
+import presentation.menu.UIInputData
 import presentation.menu.UIMenu
+import presentation.passenger.PassengerPresentationFactory
 import presentation.seat.SeatPresentationFactory
 import presentation.seat.section.SeatSectionPresentationFactory
 import presentation.utils.Formatter
@@ -35,6 +38,8 @@ fun main() {
     val baggagePackPresentation = BaggagePackPresentationFactory().getPresentationFormat(format)
     val seatSectionPresentation = SeatSectionPresentationFactory().getPresentationFormat(format)
     val seatPresentation = SeatPresentationFactory().getPresentationFormat(format)
+    val passengerPresentation = PassengerPresentationFactory().getPresentationFormat(format)
+
     val ticketData = TicketDataDI().providesTicketsData()
     val flightData = FlightDataDI().providesFlightsData()
     /** 1. Mostrar lista de Vuelos **/
@@ -118,6 +123,27 @@ fun main() {
     println("Seat Saved")
     println(
         seatPresentation.format(seatSaved)
+    )
+
+    /**7. Introduce Information Passenger **/
+    var passengerQty = ""
+    do {
+        println("How many passenger are?")
+        passengerQty = readLine().orEmpty()
+    }while (!passengerQty.isNumber())
+
+    val passengers = (1..passengerQty.toInt()).map {
+        println("Passenger: $it")
+        val uiInputData = object  : UIInputData { }
+        val name = uiInputData.requestField("Name")
+        val email = uiInputData.requestField("Email")
+        val phone = uiInputData.requestField("Phone")
+        Passenger(name, email, phone)
+    }
+    AssignPassengersToTicket(ticketData).invoke(passengers)
+
+    println(
+        passengerPresentation.format(passengers)
     )
 
 }

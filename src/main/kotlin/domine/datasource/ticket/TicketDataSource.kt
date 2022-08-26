@@ -4,5 +4,5 @@ import domine.model.Ticket
 
 interface TicketDataSource {
 
-    val tickets: List<Ticket>
+    val tickets: MutableList<Ticket>
 }
