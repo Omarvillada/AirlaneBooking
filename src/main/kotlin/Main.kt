@@ -1,5 +1,6 @@
 import data.baggage.BaggageRegularLocalSource
 import data.baggage.BaggageVClubLocalSource
+import data.reservation.ReservationSingleton
 import domine.model.Flight
 import domine.model.Passenger
 import domine.model.baggage.pack.BaggagePackage
@@ -10,6 +11,8 @@ import domine.usecases.baggage.GetBaggageSaved
 import domine.usecases.flight.GetFlightSaved
 import domine.usecases.flight.GetFlights
 import domine.usecases.flight.di.FlightDataDI
+import domine.usecases.reservation.AssignTicketToReservation
+import domine.usecases.reservation.GetReservation
 import domine.usecases.seat.GetSeatSaved
 import domine.usecases.seat.GetSeatsBy
 import domine.usecases.seat.GetSeatsSection
@@ -25,6 +28,7 @@ import presentation.flight.formats.FlightConsoleFormat
 import presentation.menu.UIInputData
 import presentation.menu.UIMenu
 import presentation.passenger.PassengerPresentationFactory
+import presentation.reservation.ReservationPresentationFactory
 import presentation.seat.SeatPresentationFactory
 import presentation.seat.section.SeatSectionPresentationFactory
 import presentation.utils.Formatter
@@ -34,14 +38,20 @@ import java.time.Month
 
 fun main() {
     val format = PresentationFormat.CONSOLE
+
+    val ticketData = TicketDataDI().providesTicketsData()
+    val flightData = FlightDataDI().providesFlightsData()
+
     val flightsPresentation = FlightPresentationFactory().getPresentationFormat(format)
     val baggagePackPresentation = BaggagePackPresentationFactory().getPresentationFormat(format)
     val seatSectionPresentation = SeatSectionPresentationFactory().getPresentationFormat(format)
     val seatPresentation = SeatPresentationFactory().getPresentationFormat(format)
     val passengerPresentation = PassengerPresentationFactory().getPresentationFormat(format)
+    val reservationPresentation = ReservationPresentationFactory().getPresentationFormat(format)
 
-    val ticketData = TicketDataDI().providesTicketsData()
-    val flightData = FlightDataDI().providesFlightsData()
+    val reservationSingleton = ReservationSingleton()
+
+
     /** 1. Mostrar lista de Vuelos **/
     val uiMenuFlight = object : UIMenu<Flight> {}
     val flightsMap = GetFlights(flightData).invoke(Month.JANUARY)
@@ -145,5 +155,19 @@ fun main() {
     println(
         passengerPresentation.format(passengers)
     )
+
+    /** 8. Get Reservation **/
+
+    AssignTicketToReservation(
+        reservationSingleton, GetTickets((ticketData))
+    ).invoke()
+
+    val reservation = GetReservation(reservationSingleton).invoke()
+    println()
+    println("*** RESERVATION ***")
+    println(
+        reservationPresentation.format(reservation)
+    )
+
 
 }

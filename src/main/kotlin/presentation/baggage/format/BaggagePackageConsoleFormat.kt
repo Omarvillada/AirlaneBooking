@@ -9,11 +9,10 @@ class BaggagePackageConsoleFormat(
 ) : Formatter<BaggagePackage> {
     override fun format(t: BaggagePackage): String {
         return """
-${t.name}
-${baggageType.format(t.baggageTypes).trim()}
-Boarding Turn: ${t.boardingTurn.name}
-Price ${t.price}
-
+            ${t.name}
+            ${baggageType.format(t.baggageTypes).trim()}
+            Boarding Turn: ${t.boardingTurn.name}
+            Price ${t.price}
         """.trimIndent()
     }
 

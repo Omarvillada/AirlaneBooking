@@ -3,16 +3,18 @@ package domine.usecases.reservation
 import domine.datasource.ReservationDataSource
 import domine.model.Reservation
 import domine.model.Ticket
+import domine.usecases.ticket.GetTickets
 
 private const val CODE_SIZE = 5
 class AssignTicketToReservation(
-    private val reservationDataSource: ReservationDataSource
+    private val reservationDataSource: ReservationDataSource,
+    private val getTickets: GetTickets
 ) {
-    operator fun invoke(tickets: List<Ticket>): Reservation{
+    operator fun invoke(): Reservation{
         return reservationDataSource.reservation.apply {
             this.code = generateCode()
-            this.departureTickets = tickets
-            this.returnTickets = tickets
+            this.departureTickets = getTickets()
+            this.returnTickets = getTickets()
         }
     }
 
